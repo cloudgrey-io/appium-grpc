@@ -1,0 +1,28 @@
+{
+  "name": "appium-grpc-client",
+  "version": "1.0.0",
+  "description": "Client for the Appium gRPC server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudgrey-io/appium-grpc.git"
+  },
+  "keywords": [
+    "appium",
+    "grpc"
+  ],
+  "author": "Jonathan Lipps <jlipps@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cloudgrey-io/appium-grpc/issues"
+  },
+  "homepage": "https://github.com/cloudgrey-io/appium-grpc#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.1",
+    "bluebird": "^3.5.5",
+    "grpc": "^1.21.1"
+  }
+}

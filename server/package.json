@@ -1,0 +1,28 @@
+{
+  "name": "appium-grpc-server",
+  "version": "1.0.0",
+  "description": "Appium server supporting grpc protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudgrey-io/appium-grpc.git"
+  },
+  "keywords": [
+    "appium",
+    "testing"
+  ],
+  "author": "Jonathan Lipps <jlipps@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cloudgrey-io/appium-grpc/issues"
+  },
+  "homepage": "https://github.com/cloudgrey-io/appium-grpc#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.1",
+    "appium": "^1.13.0",
+    "grpc": "^1.21.1"
+  }
+}
