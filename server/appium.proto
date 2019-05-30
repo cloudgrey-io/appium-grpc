@@ -4,7 +4,7 @@ message CommandRequest {
     string cmdName = 1;
     string sessionId = 2;
     repeated string urlParams = 3;
-    map<string, string> jsonParams = 4;
+    bytes jsonParams = 4;
 }
 
 message CommandResponse {
@@ -15,7 +15,7 @@ message CommandResponse {
 }
 
 message SuccessResponse {
-    string jsonValue = 1;
+    bytes jsonValue = 1;
 }
 
 message ErrorResponse {

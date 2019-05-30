@@ -24,5 +24,10 @@
     "@grpc/proto-loader": "^0.5.1",
     "bluebird": "^3.5.5",
     "grpc": "^1.21.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.1.4"
   }
 }

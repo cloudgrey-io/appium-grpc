@@ -11,23 +11,53 @@ const protoDesc = grpc.loadPackageDefinition(packageDef);
 const runClient = new protoDesc.RunCommand('localhost:50051', grpc.credentials.createInsecure());
 const run = B.promisify(runClient.run, {context: runClient});
 
-async function runCommand (cmdName, urlParams, jsonParams) {
-  const res = await run({
-    cmdName: 'getStatus',
-    jsonParams: {
-      foo: "bar"
-    }
-  });
+const DEF_HOST = "localhost";
+const DEF_PORT = 50051;
 
-  if (res.success) {
-    console.log("Success");
-    return JSON.parse(res.success.jsonValue);
-  } else {
-    const e = new Error(`${res.error.error}: ${res.error.msg}`);
-    throw e;
+
+class AppiumDriver {
+  constructor ({host = DEF_HOST, port = DEF_PORT}) {
+    this.host = host;
+    this.port = port;
+    this.sessionId = null;
+  }
+
+  async runCommand (cmdName, urlParams = [], jsonParams = {}) {
+    jsonParams = JSON.stringify(jsonParams);
+    const res = await run({
+      cmdName,
+      sessionId: this.sessionId || "",
+      urlParams,
+      jsonParams: Buffer.from(jsonParams),
+    });
+
+    if (res.success) {
+      return JSON.parse(res.success.jsonValue.toString('utf8'));
+    } else {
+      const e = new Error(`${res.error.error}: ${res.error.msg}`);
+      throw e;
+    }
+  }
+
+  async createSession (caps) {
+    const res = await this.runCommand('createSession', [], {
+      desiredCapabilities: {},
+      requiredCapabilities: {},
+      capabilities: {
+        alwaysMatch: caps,
+        firstMatch: [],
+      }
+    });
+    this.sessionId = res[0];
+  }
+
+  async source () {
+    return await this.runCommand('getPageSource');
+  }
+
+  async deleteSession () {
+    await this.runCommand('deleteSession');
   }
 }
 
-(async function main() {
-  return await runCommand('getStatus');
-})().then(console.log).catch(console.log);
+module.exports = {AppiumDriver};
